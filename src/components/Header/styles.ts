@@ -1,7 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 interface ContainerProps {
   size?: 'small' | 'large';
+}
+
+interface Selected {
+  selected?: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -15,22 +20,37 @@ export const Container = styled.div<ContainerProps>`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+`;
 
-    nav {
-      a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        transition: opacity 0.2s;
+export const MenuItem = styled(Link)<Selected>`
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.2s;
 
-        & + a {
-          margin-left: 32px;
-        }
-
-        &:hover {
-          opacity: 0.6;
-        }
+  ${props =>
+    props.selected === true &&
+    css`
+      &::after {
+        transition: 0.2s;
+        content: ' ';
+        position: absolute;
+        bottom: -10px;
+        left: 0px;
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #ff872c;
       }
-    }
+    `}
+
+  & + a {
+    margin-left: 32px;
+  }
+
+  &:hover {
+    opacity: 0.6;
   }
 `;

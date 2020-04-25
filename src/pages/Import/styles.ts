@@ -1,5 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+
+interface ErrorMessage {
+  show: boolean;
+}
 
 export const Container = styled.div`
   width: 100%;
@@ -53,4 +57,24 @@ export const Footer = styled.section`
       background: ${shade(0.2, '#ff872c')};
     }
   }
+`;
+
+export const ImportError = styled.section<ErrorMessage>`
+  display: none;
+  opacity: 0;
+  justify-content: center;
+  flex: 1;
+  padding: 16px 0;
+  background-color: rgba(210, 50, 50, 0.8);
+  color: #fff;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+
+  ${props =>
+    props.show &&
+    css`
+      display: flex;
+      height: auto;
+      opacity: 1;
+    `}
 `;
